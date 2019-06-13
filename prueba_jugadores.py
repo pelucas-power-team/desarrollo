@@ -1,7 +1,8 @@
 import sys
 from PyQt5 import QtCore, QtGui, uic
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
-from modulos import ventanas as wind
+from .modulos import ventanas as wind #IMPORTANTE, hay que poner siempre el . delante del nombre de la carpeta
+#para que no joderla
 
 
 # Cargar nuestro formulario *.ui
