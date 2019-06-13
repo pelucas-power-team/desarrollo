@@ -1,1 +1,3 @@
-print('hello')
+print('hello\n')
+print('hola')
+
