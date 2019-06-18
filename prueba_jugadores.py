@@ -1,8 +1,7 @@
 import sys
 from PyQt5 import QtCore, QtGui, uic
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
-from .modulos import ventanas as wind #IMPORTANTE, hay que poner siempre el . delante del nombre de la carpeta
-#para que no joderla
+from modulos import ventanas as wind
 
 
 # Cargar nuestro formulario *.ui
@@ -23,7 +22,7 @@ class MainWindowClass(QMainWindow, main_class):
 
     def fopen_window_2(self):
         MainWindowClass.close(self)
-        self.player_2.fwindow()
+        self.player_2.show()
 
     """def fopen_window_4(self):
         MainWindowClass.close(self)

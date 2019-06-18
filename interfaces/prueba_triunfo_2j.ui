@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Repartir</string>
   </property>
-  <widget class="QLabel" name="mazo">
+  <widget class="QLabel" name="i_mazo">
    <property name="geometry">
     <rect>
      <x>270</x>
@@ -35,7 +35,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="triunfo">
+  <widget class="QLabel" name="i_triunfo">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -334,21 +334,21 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <zorder>carta_1</zorder>
-  <zorder>triunfo</zorder>
-  <zorder>mazo</zorder>
-  <zorder>boton_repartir</zorder>
-  <zorder>carta_21</zorder>
-  <zorder>carta_22</zorder>
-  <zorder>carta_23</zorder>
-  <zorder>carta_24</zorder>
-  <zorder>carta_25</zorder>
   <zorder>carta_26</zorder>
+  <zorder>carta_1</zorder>
+  <zorder>i_triunfo</zorder>
+  <zorder>i_mazo</zorder>
+  <zorder>boton_repartir</zorder>
   <zorder>carta_2</zorder>
   <zorder>carta_3</zorder>
   <zorder>carta_4</zorder>
   <zorder>carta_5</zorder>
   <zorder>carta_6</zorder>
+  <zorder>carta_25</zorder>
+  <zorder>carta_24</zorder>
+  <zorder>carta_23</zorder>
+  <zorder>carta_22</zorder>
+  <zorder>carta_21</zorder>
  </widget>
  <resources/>
  <connections/>
