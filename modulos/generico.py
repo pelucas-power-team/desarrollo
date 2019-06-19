@@ -11,34 +11,36 @@ class Cbaraja():
         self.__auxbaraja = []
         self.__auxpuntos = []
         self.__mis_puntos = []
-        self.__diccionario = None
         self.__puntuables =[[108, 208, 308, 408],[109, 209, 309, 409], [110, 210, 310, 410],[13, 23, 33, 43], [11, 21, 31, 41]]
         self.__orden =[8, 9]
 
     def __fcrearbaraja(self):
+        baraja = [0 for i in range(40)]
         k = 0
         for i in range(1,5):
             for j in range(1,11):
                 if j not in self.__orden:
                     self.__mi_baraja[k] = int(str(i) + str(j),base = 10)
+                    baraja[k] = int(str(i) + str(j),base = 10)
                     if j != 10 :
                         self.__auxbaraja.append(str(i) + '0' +  str(j))
                     else:
                         self.__auxbaraja.append(str(i) + str(j))
                 else:
                     self.__mi_baraja[k] = int(str(i) + str(0) + str(j),base = 10)
+                    baraja[k] = int(str(i) + str(0) + str(j),base = 10)
                     self.__auxbaraja.append(str(self.__mi_baraja[k]))
                 k+=1
 
         puntos = self.__fpuntos(self.__mi_baraja)
-        self.__diccionario = [self.__mi_baraja,self.__auxbaraja, puntos]
+        diccionario = [baraja,self.__auxbaraja, puntos]
 
-        return(self.__mi_baraja,self.__diccionario)
+        return(self.__mi_baraja,diccionario)
 
     def __fbarajar(self):
-        [self.__mi_baraja,__dic] = self.__fcrearbaraja()
+        self.__mi_baraja, __dic = self.__fcrearbaraja()
         r.shuffle(self.__mi_baraja)
-        return(self.__mi_baraja,__dic)
+        return(self.__mi_baraja, __dic)
 
     def __fpuntos(self,baraja):
 
@@ -59,7 +61,7 @@ class Cbaraja():
         return (self.__mis_puntos)
 
     def getBaraja(self):
-        [baraja, dic] = self.__fbarajar()
+        baraja, dic = self.__fbarajar()
         puntos = self.__fpuntos(baraja)
         return (baraja, puntos,dic)
 
@@ -68,23 +70,49 @@ class Cmano(Cbaraja):
         super().__init__()
         self.baraja = []
         self.puntos = []
-        self.mi_mano = []
-        self.mi_mano_orden = []
-        self.mis_puntos = []
+        self.mi_mano1 = []
+        self.mi_mano2 =[]
+        self.mano_j1 = []
+        self.mano_j2 = []
+        self.puntos_j1 = []
+        self.puntos_j2 = []
+        self.mi_mano_orden1 = []
+        self.mi_mano_orden2 = []
+        self.mis_puntos1 = []
+        self.mis_puntos2 = []
         self.carta = []
         self.triunfo = None
         self.dic = None
 
     def frepartir(self,carp, forma,numj):
         [self.baraja, self.puntos, self.dic] = self.getBaraja()
+
         if numj == 2:
             for i in range(12):
-                mi_carta = self.baraja[i]
-                self.mi_mano_orden.append(mi_carta)
-                self.mis_puntos.append(self.puntos[i])
-                self.carta.append(carp + str(mi_carta) + forma)
-                self.mi_mano.append(QPixmap(self.carta[i]))
+                if i<6:
+                    self.mano_j1.append(self.baraja[i])
+                else:
+                    self.mano_j2.append(self.baraja[i])
+
+            self.mano_j1, self.puntos_j1 = self.fordenar(self.mano_j1,self.dic)
+            self.mano_j2, self.puntos_j2 = self.fordenar(self.mano_j2, self.dic)
+
+            for i in range(12):
+                if i<6:
+                    mi_carta = self.mano_j1[i]
+                    self.mi_mano_orden1.append(mi_carta)
+                    self.mis_puntos1.append(self.puntos_j1[i])
+                    self.carta.append(carp + str(mi_carta) + forma)
+                    self.mi_mano1.append(QPixmap(self.carta[i]))
+                else:
+                    mi_carta = self.mano_j2[i-6]
+                    self.mi_mano_orden2.append(mi_carta)
+                    self.mis_puntos2.append(self.puntos_j1[i-6])
+                    self.carta.append(carp + str(mi_carta) + forma)
+                    self.mi_mano2.append(QPixmap(self.carta[i]))
+
             self.triunfo = self.baraja[12]
+
         elif numj == 4:
             for i in range(24):
                 mi_carta = self.baraja[i]
@@ -94,13 +122,59 @@ class Cmano(Cbaraja):
                 self.mi_mano.append(QPixmap(self.carta[i]))
             self.triunfo = self.baraja[12]
 
-        return(self.mi_mano, self.mis_puntos, self.triunfo,self.dic)
+        return(self.mi_mano1,self.mi_mano2, self.mis_puntos1,self.mis_puntos2, self.triunfo,self.dic)
 
-    def ordenar(self,mano,ref_global):
-        ref = ref_global[1]
-        ref_str = list(ref)
-        mano_str = list(mano)
+    def fordenar(self,mano_ori,ref_global):
+        mano = []
+        puntos = []
+        mano_str = []
+        aux_2 = []
+        aux_puntos =[]
+        mano_salida = []
+        puntos_salida = []
+
+        for i in range(len(ref_global[0])):
+            for j in range(len(mano_ori)):
+                if ref_global[0][i] == mano_ori[j]:
+                    mano.append(int(ref_global[1][i],base=10))
+                    puntos.append(ref_global[2][i])
+
         for i in range(len(mano)):
+            aux = mano[i]
+            mano_str.append(list(str(aux)))
+
+        #Aqui tenemos un señor fallote de puta madre
+        for i in range(len(mano_str)):
+            for j in range(len(mano_str)):
+                if (mano_str[i][0] == mano_str[j][0]) and (mano_str[i][2] != mano_str[j][2]):
+                    aux_2.append(mano[i])
+                    aux_puntos.append(puntos[i])
+
+        for i in range(len(mano_str)):
+            for j in range(len(mano_str)):
+                if mano_str[i][0] == mano_str[j][0] and aux_2 not in mano_salida:
+                    if aux_2[i] > aux_2[j]:
+                        if aux_puntos[i] > aux_puntos[j]:
+                            mano_salida.append(aux_2[j])
+                            puntos_salida.append(aux_puntos[j])
+                        else:
+                            mano_salida.append(aux_2[i])
+                            puntos_salida.append(aux_puntos[i])
+                    else:
+                        if puntos[i] > puntos[j]:
+                            mano_salida.append(aux_2[j])
+                            puntos_salida.append(aux_puntos[j])
+                        else:
+                            mano_salida.append(aux_2[i])
+                            puntos_salida.append(aux_puntos[i])
+        print(mano_ori)
+        print(len(mano_str))
+        print(aux_2)
+        print(mano_salida)
+        print(puntos_salida)
+        return mano_salida,puntos_salida
+
+
     #Tengo que comparar la mano con la referencia, en primer lugar los palos, luego las puntuaciones y por ultimo los valore sin puntos
 
 
