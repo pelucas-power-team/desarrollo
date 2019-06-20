@@ -94,8 +94,9 @@ class Cmano(Cbaraja):
                 else:
                     self.mano_j2.append(self.baraja[i])
 
-            self.mano_j1, self.puntos_j1 = self.fordenar(self.mano_j1,self.dic)
-            self.mano_j2, self.puntos_j2 = self.fordenar(self.mano_j2, self.dic)
+            self.triunfo = self.baraja[12]
+            self.mano_j1, self.puntos_j1 = self.fordenar(self.mano_j1,self.dic,self.triunfo)
+            self.mano_j2, self.puntos_j2 = self.fordenar(self.mano_j2, self.dic,self.triunfo)
 
             for i in range(12):
                 if i<6:
@@ -111,8 +112,6 @@ class Cmano(Cbaraja):
                     self.carta.append(carp + str(mi_carta) + forma)
                     self.mi_mano2.append(QPixmap(self.carta[i]))
 
-            self.triunfo = self.baraja[12]
-
         elif numj == 4:
             #Esto todavia hay que adaptarlo para que orene bien las cartas
             for i in range(24):
@@ -125,15 +124,18 @@ class Cmano(Cbaraja):
 
         return(self.mi_mano1,self.mi_mano2, self.mis_puntos1,self.mis_puntos2, self.triunfo,self.dic)
 
-    def fordenar(self,mano_ori,ref_global):
+    def fordenar(self,mano_ori,ref_global,triunfo):
         mano = []
         puntos = []
         mano_str = []
-        aux_2 = []
-        aux_3 =[]
-        aux_puntos =[]
         mano_salida = []
-        puntos_salida = []
+        mano_aux = []
+        triunfo_carta = None
+        triunfos = []
+        triunfo_str = []
+        aux_1 = []
+        aux_2 = []
+
 
         for i in range(len(ref_global[0])):
             for j in range(len(mano_ori)):
@@ -141,48 +143,50 @@ class Cmano(Cbaraja):
                     mano.append(int(ref_global[1][i],base=10))
                     puntos.append(ref_global[2][i])
 
+        for i in range(len(ref_global[0])):
+            if ref_global[0][i] == triunfo:
+                triunfo_carta = int(ref_global[1][i],base = 10)
+
+        triunfo_str = list(str(triunfo_carta))
+
         for i in range(len(mano)):
             aux = mano[i]
             mano_str.append(list(str(aux)))
 
-        for i in range(len(mano_str)):
-            for j in range(len(mano_str)):
-                if (mano_str[i][0] == mano_str[j][0]) and (mano[i] not in aux_2):
-                    aux_2.append(mano[i])
-                    aux_puntos.append(puntos[i])
 
-        for i in range(len(mano_str)):
-            for j in range(len(mano_str)):
-                if mano_str[i][0] == mano_str[j][0] and aux_2[i] not in aux_3:
-                        if aux_puntos[j] > aux_puntos[i]:
-                            aux_3.append(aux_2[i])
-                            puntos_salida.append(aux_puntos[i])
-                        elif aux_puntos[j] == aux_puntos[i]:
-                            if aux_2[i]>aux_2[j]:
-                                aux_3.append(aux_2[i])
-                                puntos_salida.append(aux_puntos[i])
-                            else:
-                                aux_3.append(aux_2[j])
-                                puntos_salida.append(aux_puntos[i])
+        for i in range(1, len(mano_str)):
+            for j in range(0, len(mano_str) - i):
+                if (puntos[j + 1] < puntos[j]) and (mano_str[j+1][0] == mano_str[j][0]):
+                    almacen = puntos[j]
+                    puntos[j] = puntos[j + 1]
+                    puntos[j + 1] = almacen
+                    almacen = mano[j]
+                    mano[j] = mano[j + 1]
+                    mano[j + 1] = almacen
 
-        #mano_salida=[]
-        for j in (aux_3):
-            #print(len(ref_global[0]))
+        for i in range(len(mano)):
+            if mano_str[i][0] == triunfo_str[0]:
+                triunfos.append(mano[i])
+            else:
+                aux_1.append(mano[i])
+
+        for i in range(len(mano)):
+            if mano[i] not in triunfos:
+                aux_2.append(mano[i])
+
+        for i in range(len(mano)):
+            if i < len(triunfos):
+                mano[i] = triunfos[i]
+            else:
+                mano[i] =aux_2[i-len(triunfos)]
+
+        for j in (mano):
             for i in range(len(ref_global[0])):
-                #print(j)
-                #print(ref_global[1][i])
-                if int(ref_global[1][i]) == int(j):
-                    #print("match")
+                if int(ref_global[1][i]) == j:
                     mano_salida.append(ref_global[0][i])
         
-        '''print(mano_ori)
-        print(len(mano_str))'''
-        print(aux_3)
-        print(mano_salida)
-        return mano_salida, puntos_salida
 
-
-    #Tengo que comparar la mano con la referencia, en primer lugar los palos, luego las puntuaciones y por ultimo los valore sin puntos
+        return mano_salida, puntos
 
 
 class Ctriunfo():
