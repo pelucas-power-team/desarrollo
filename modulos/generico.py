@@ -85,7 +85,7 @@ class Cmano(Cbaraja):
         self.dic = None
 
     def frepartir(self,carp, forma,numj):
-        [self.baraja, self.puntos, self.dic] = self.getBaraja()
+        self.baraja, self.puntos, self.dic = self.getBaraja()
 
         if numj == 2:
             for i in range(12):
@@ -114,6 +114,7 @@ class Cmano(Cbaraja):
             self.triunfo = self.baraja[12]
 
         elif numj == 4:
+            #Esto todavia hay que adaptarlo para que orene bien las cartas
             for i in range(24):
                 mi_carta = self.baraja[i]
                 self.mi_mano_orden.append(mi_carta)
@@ -129,6 +130,7 @@ class Cmano(Cbaraja):
         puntos = []
         mano_str = []
         aux_2 = []
+        aux_3 =[]
         aux_puntos =[]
         mano_salida = []
         puntos_salida = []
@@ -143,36 +145,41 @@ class Cmano(Cbaraja):
             aux = mano[i]
             mano_str.append(list(str(aux)))
 
-        #Aqui tenemos un señor fallote de puta madre
         for i in range(len(mano_str)):
             for j in range(len(mano_str)):
-                if (mano_str[i][0] == mano_str[j][0]) and (mano_str[i][2] != mano_str[j][2]):
+                if (mano_str[i][0] == mano_str[j][0]) and (mano[i] not in aux_2):
                     aux_2.append(mano[i])
                     aux_puntos.append(puntos[i])
 
         for i in range(len(mano_str)):
             for j in range(len(mano_str)):
-                if mano_str[i][0] == mano_str[j][0] and aux_2 not in mano_salida:
-                    if aux_2[i] > aux_2[j]:
-                        if aux_puntos[i] > aux_puntos[j]:
-                            mano_salida.append(aux_2[j])
-                            puntos_salida.append(aux_puntos[j])
-                        else:
-                            mano_salida.append(aux_2[i])
+                if mano_str[i][0] == mano_str[j][0] and aux_2[i] not in aux_3:
+                        if aux_puntos[j] > aux_puntos[i]:
+                            aux_3.append(aux_2[i])
                             puntos_salida.append(aux_puntos[i])
-                    else:
-                        if puntos[i] > puntos[j]:
-                            mano_salida.append(aux_2[j])
-                            puntos_salida.append(aux_puntos[j])
-                        else:
-                            mano_salida.append(aux_2[i])
-                            puntos_salida.append(aux_puntos[i])
-        print(mano_ori)
-        print(len(mano_str))
-        print(aux_2)
+                        elif aux_puntos[j] == aux_puntos[i]:
+                            if aux_2[i]>aux_2[j]:
+                                aux_3.append(aux_2[i])
+                                puntos_salida.append(aux_puntos[i])
+                            else:
+                                aux_3.append(aux_2[j])
+                                puntos_salida.append(aux_puntos[i])
+
+        #mano_salida=[]
+        for j in (aux_3):
+            #print(len(ref_global[0]))
+            for i in range(len(ref_global[0])):
+                #print(j)
+                #print(ref_global[1][i])
+                if int(ref_global[1][i]) == int(j):
+                    #print("match")
+                    mano_salida.append(ref_global[0][i])
+        
+        '''print(mano_ori)
+        print(len(mano_str))'''
+        print(aux_3)
         print(mano_salida)
-        print(puntos_salida)
-        return mano_salida,puntos_salida
+        return mano_salida, puntos_salida
 
 
     #Tengo que comparar la mano con la referencia, en primer lugar los palos, luego las puntuaciones y por ultimo los valore sin puntos
