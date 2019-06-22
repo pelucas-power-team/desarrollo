@@ -1,9 +1,6 @@
-import sys
+
 import random as r
-from PyQt5 import QtCore, uic
-from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtGui import QPixmap, QTransform
-import csv
 
 class Cbaraja():
     def __init__(self):
@@ -72,14 +69,24 @@ class Cmano(Cbaraja):
         self.puntos = []
         self.mi_mano1 = []
         self.mi_mano2 =[]
+        self.mi_mano3 = []
+        self.mi_mano4 = []
         self.mano_j1 = []
         self.mano_j2 = []
+        self.mano_j3 = []
+        self.mano_j4 = []
         self.puntos_j1 = []
         self.puntos_j2 = []
+        self.puntos_j3 = []
+        self.puntos_j4 = []
         self.mi_mano_orden1 = []
         self.mi_mano_orden2 = []
+        self.mi_mano_orden3 = []
+        self.mi_mano_orden4 = []
         self.mis_puntos1 = []
         self.mis_puntos2 = []
+        self.mis_puntos3 = []
+        self.mis_puntos4 = []
         self.carta = []
         self.triunfo = None
         self.dic = None
@@ -102,37 +109,68 @@ class Cmano(Cbaraja):
                 if i<6:
                     mi_carta = self.mano_j1[i]
                     self.mi_mano_orden1.append(mi_carta)
-                    self.mis_puntos1.append(self.puntos_j1[i])
                     self.carta.append(carp + str(mi_carta) + forma)
                     self.mi_mano1.append(QPixmap(self.carta[i]))
                 else:
                     mi_carta = self.mano_j2[i-6]
                     self.mi_mano_orden2.append(mi_carta)
-                    self.mis_puntos2.append(self.puntos_j1[i-6])
                     self.carta.append(carp + str(mi_carta) + forma)
                     self.mi_mano2.append(QPixmap(self.carta[i]))
+            return (self.mi_mano1, self.mi_mano2, self.mis_puntos1, self.mis_puntos2, self.triunfo, self.dic)
 
         elif numj == 4:
             #Esto todavia hay que adaptarlo para que orene bien las cartas
             for i in range(24):
-                mi_carta = self.baraja[i]
-                self.mi_mano_orden.append(mi_carta)
-                self.mis_puntos.append(self.puntos[i])
-                self.carta.append(carp + str(mi_carta) + forma)
-                self.mi_mano.append(QPixmap(self.carta[i]))
-            self.triunfo = self.baraja[12]
+                if i < 6:
+                    self.mano_j1.append(self.baraja[i])
+                elif 12>i>6:
+                    self.mano_j2.append(self.baraja[i])
+                elif 18>i>12:
+                    self.mano_j3.append(self.baraja[i])
+                else:
+                    self.mano_j4.append(self.baraja[i])
 
-        return(self.mi_mano1,self.mi_mano2, self.mis_puntos1,self.mis_puntos2, self.triunfo,self.dic)
+            self.triunfo = self.baraja[24]
+            self.mano_j1, self.puntos_j1 = self.fordenar(self.mano_j1, self.dic, self.triunfo)
+            self.mano_j2, self.puntos_j2 = self.fordenar(self.mano_j2, self.dic, self.triunfo)
+            self.mano_j3, self.puntos_j3 = self.fordenar(self.mano_j3, self.dic, self.triunfo)
+            self.mano_j4, self.puntos_j4 = self.fordenar(self.mano_j4, self.dic, self.triunfo)
+
+            for i in range(24):
+                if i < 6:
+                    mi_carta = self.mano_j1[i]
+                    self.mi_mano_orden1.append(mi_carta)
+                    self.carta.append(carp + str(mi_carta) + forma)
+                    self.mi_mano1.append(QPixmap(self.carta[i]))
+                elif 12>i>6:
+                    mi_carta = self.mano_j2[i-6]
+                    self.mi_mano_orden1.append(mi_carta)
+                    self.carta.append(carp + str(mi_carta) + forma)
+                    self.mi_mano2.append(QPixmap(self.carta[i]))
+                elif 18>i>12:
+                    mi_carta = self.mano_j3[i-12]
+                    self.mi_mano_orden1.append(mi_carta)
+                    self.carta.append(carp + str(mi_carta) + forma)
+                    self.mi_mano3.append(QPixmap(self.carta[i]))
+                else:
+                    mi_carta = self.mano_j3[i - 18]
+                    self.mi_mano_orden1.append(mi_carta)
+                    self.carta.append(carp + str(mi_carta) + forma)
+                    self.mi_mano4.append(QPixmap(self.carta[i]))
+            return (self.mi_mano1, self.mi_mano2,
+                    self.mi_mano3, self.mi_mano4,
+                    self.mis_puntos1, self.mis_puntos2,
+                    self.mis_puntos3, self.mis_puntos4,
+                    self.triunfo, self.dic)
+
 
     def fordenar(self,mano_ori,ref_global,triunfo):
         mano = []
         puntos = []
         mano_str = []
         mano_salida = []
-        mano_aux = []
         triunfo_carta = None
         triunfos = []
-        triunfo_str = []
         aux_1 = []
         aux_2 = []
 
@@ -184,10 +222,8 @@ class Cmano(Cbaraja):
             for i in range(len(ref_global[0])):
                 if int(ref_global[1][i]) == j:
                     mano_salida.append(ref_global[0][i])
-        
 
         return mano_salida, puntos
-
 
 class Ctriunfo():
     def __init__(self):

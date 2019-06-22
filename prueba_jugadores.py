@@ -24,9 +24,9 @@ class MainWindowClass(QMainWindow, main_class):
         MainWindowClass.close(self)
         self.player_2.show()
 
-    """def fopen_window_4(self):
+    '''def fopen_window_4(self):
         MainWindowClass.close(self)
-        self.player_4.fwindow"""
+        self.player_4.fwindow'''
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
