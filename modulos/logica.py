@@ -8,7 +8,8 @@ class Clogica(Cmano):
         super().__init__()
         self.baza = []
         if numj == 2:
-
+            abajo = 0
+            arriba = 1
             self.mi_baza, self.mis_puntos = self.fordenar(self.baza, self.dic, self.triunfo)
             for i in range(len(mi_baza)):
                 for j in range(len(dic[0])):
@@ -26,18 +27,55 @@ class Clogica(Cmano):
                 baza_str.append(list(str(aux)))
 
             if baza_str[0][0] == baza_str[1][0]:
-                gana_puntos = mis_puntos[1]
+                gana_puntos = mis_puntos[0] + mis_puntos[1]
+
                 if mi_baza[1] == baza[0]:
+                     puntos_0 = puntos_0 + gana_puntos
 
                 else:
+                    puntos_1 = puntos_1 + gana_puntos
+                    if abajo == 0:
+                        abajo = 1
+                        arriba = 0
+                        puntos_aux0 = puntos_0
+                        puntos_aux1 = puntos_1
+                        puntos_0 = puntos_aux1
+                        puntos_1 = puntos_aux0
+                    else:
+                        abajo = 0
+                        arriba = 1
+                        puntos_aux0 = puntos_0
+                        puntos_aux1 = puntos_1
+                        puntos_0 = puntos_aux1
+                        puntos_1 = puntos_aux0
             else:
                 if baza_str[0][0] == triunfo_str[0]:
-                    gana_puntos = mis_puntos[0]
-                else:
-                    if baza[0] == mi_baza[0]:
-                        gana_puntos = mis_puntos[0]
+                    gana_puntos = mis_puntos[0] + mis_puntos[1]
+
+                    if mi_baza[0] == baza[0]:
+                        puntos_0 = puntos_0 + gana_puntos
+
                     else:
-                        gana_puntos = mis_puntos[1]
+                        puntos_1 = puntos_1 + gana_puntos
+                        if abajo == 0:
+                            abajo = 1
+                            arriba = 0
+                            puntos_aux0 = puntos_0
+                            puntos_aux1 = puntos_1
+                            puntos_0 = puntos_aux1
+                            puntos_1 = puntos_aux0
+                        else:
+                            abajo = 0
+                            arriba = 1
+                            puntos_aux0 = puntos_0
+                            puntos_aux1 = puntos_1
+                            puntos_0 = puntos_aux1
+                            puntos_1 = puntos_aux0
+
+                else:
+                    gana_puntos = mis_puntos[0] + mis_puntos[1]
+                    puntos_0 = puntos_0 + gana_puntos
+
 
 
 
