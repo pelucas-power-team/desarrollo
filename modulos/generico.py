@@ -1,5 +1,6 @@
 
 import random as r
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QPixmap, QTransform
 
 class Cbaraja():
@@ -116,10 +117,10 @@ class Cmano(Cbaraja):
                     self.mi_mano_orden2.append(mi_carta)
                     self.carta.append(carp + str(mi_carta) + forma)
                     self.mi_mano2.append(QPixmap(self.carta[i]))
-            return (self.mi_mano1, self.mi_mano2, self.mis_puntos1, self.mis_puntos2, self.triunfo, self.dic)
+            return (self.mi_mano1, self.mano_j1, self.mi_mano2, self.mano_j2, self.mis_puntos1, self.mis_puntos2, self.triunfo, self.dic)
 
         elif numj == 4:
-            #Esto todavia hay que adaptarlo para que orene bien las cartas
+            #Esto todavia hay que adaptarlo para que ordene bien las cartas
             for i in range(24):
                 if i < 6:
                     self.mano_j1.append(self.baraja[i])
@@ -225,6 +226,9 @@ class Cmano(Cbaraja):
 
         return mano_salida, puntos
 
+    def frobar(self)
+        pass:
+
 class Ctriunfo():
     def __init__(self):
 
@@ -246,3 +250,17 @@ class Cdorso():
         self.mi_dorso = carpeta +'0' + formato
         self.mi_imagen_dorso = QPixmap(self.mi_dorso)
         return(self.mi_imagen_dorso)
+
+class Cbotones():
+    def ficonos(self,carta,icono):
+        carta.setIcon(QtGui.QIcon(icono))
+        carta.setIconSize(QtCore.QSize(100,150))
+
+    def fcartas(self,boton,icono,carta_jugada,carta):
+        self.ficonos(boton,icono)
+        icarta_jugada = QPixmap(carta_jugada)
+        carta.setPixmap(icarta_jugada)
+
+    def fcambiocarta(self,carta,icono):
+        icarta_jugada = QPixmap(icono)
+        carta.setPixmap(icarta_jugada)
