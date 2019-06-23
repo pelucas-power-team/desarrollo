@@ -10,13 +10,16 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
    <string>Repartir</string>
   </property>
   <widget class="QLabel" name="i_mazo">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>180</x>
      <y>225</y>
      <width>100</width>
      <height>150</height>
@@ -38,142 +41,10 @@
   <widget class="QLabel" name="i_triunfo">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>180</x>
      <y>250</y>
      <width>150</width>
      <height>100</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="carta_1">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>430</y>
-     <width>100</width>
-     <height>150</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="carta_2">
-   <property name="geometry">
-    <rect>
-     <x>155</x>
-     <y>430</y>
-     <width>100</width>
-     <height>150</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="carta_3">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>430</y>
-     <width>100</width>
-     <height>150</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="carta_4">
-   <property name="geometry">
-    <rect>
-     <x>305</x>
-     <y>430</y>
-     <width>100</width>
-     <height>150</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="carta_5">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>430</y>
-     <width>100</width>
-     <height>150</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="carta_6">
-   <property name="geometry">
-    <rect>
-     <x>455</x>
-     <y>430</y>
-     <width>100</width>
-     <height>150</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -334,21 +205,310 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <zorder>carta_26</zorder>
+  <widget class="QLabel" name="i_carta_j1">
+   <property name="geometry">
+    <rect>
+     <x>345</x>
+     <y>255</y>
+     <width>100</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="i_carta_j2">
+   <property name="geometry">
+    <rect>
+     <x>455</x>
+     <y>190</y>
+     <width>100</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="carta_1">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>430</y>
+     <width>100</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../Sin título-1.png</normaloff>
+     <normalon>../Sin título-1.png</normalon>../Sin título-1.png</iconset>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="carta_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>155</x>
+     <y>430</y>
+     <width>100</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../Sin título-1.png</normaloff>
+     <normalon>../Sin título-1.png</normalon>../Sin título-1.png</iconset>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="carta_3">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>430</y>
+     <width>100</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../Sin título-1.png</normaloff>
+     <normalon>../Sin título-1.png</normalon>../Sin título-1.png</iconset>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="carta_4">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>305</x>
+     <y>430</y>
+     <width>100</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../Sin título-1.png</normaloff>
+     <normalon>../Sin título-1.png</normalon>../Sin título-1.png</iconset>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="carta_5">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>430</y>
+     <width>100</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../Sin título-1.png</normaloff>
+     <normalon>../Sin título-1.png</normalon>../Sin título-1.png</iconset>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="carta_6">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>455</x>
+     <y>430</y>
+     <width>100</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../Sin título-1.png</normaloff>
+     <normalon>../Sin título-1.png</normalon>../Sin título-1.png</iconset>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_baza">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>270</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Baza</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_turno">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>235</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Turno</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="puntos_j1">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>430</y>
+     <width>55</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="puntos_j2">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>20</y>
+     <width>55</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="partidas_j1">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>450</y>
+     <width>55</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>40</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>carta_1</zorder>
+  <zorder>carta_26</zorder>
   <zorder>i_triunfo</zorder>
   <zorder>i_mazo</zorder>
   <zorder>boton_repartir</zorder>
-  <zorder>carta_2</zorder>
-  <zorder>carta_3</zorder>
-  <zorder>carta_4</zorder>
-  <zorder>carta_5</zorder>
-  <zorder>carta_6</zorder>
   <zorder>carta_25</zorder>
   <zorder>carta_24</zorder>
   <zorder>carta_23</zorder>
   <zorder>carta_22</zorder>
   <zorder>carta_21</zorder>
+  <zorder>i_carta_j1</zorder>
+  <zorder>i_carta_j2</zorder>
+  <zorder>carta_2</zorder>
+  <zorder>carta_3</zorder>
+  <zorder>carta_4</zorder>
+  <zorder>carta_5</zorder>
+  <zorder>carta_6</zorder>
+  <zorder>boton_baza</zorder>
+  <zorder>boton_turno</zorder>
+  <zorder>puntos_j1</zorder>
+  <zorder>puntos_j2</zorder>
+  <zorder>partidas_j1</zorder>
+  <zorder>label_2</zorder>
  </widget>
  <resources/>
  <connections/>
