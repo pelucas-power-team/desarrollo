@@ -119,7 +119,7 @@ class Cmano(Cbaraja):
                     self.mi_mano2.append(QPixmap(self.carta[i]))
             return (self.mi_mano1, self.mano_j1, self.mi_mano2, self.mano_j2, self.mis_puntos1, self.mis_puntos2, self.triunfo, self.dic)
 
-        elif numj == 4:
+        '''elif numj == 4:
             #Esto todavia hay que adaptarlo para que ordene bien las cartas
             for i in range(24):
                 if i < 6:
@@ -162,7 +162,7 @@ class Cmano(Cbaraja):
                     self.mi_mano3, self.mi_mano4,
                     self.mis_puntos1, self.mis_puntos2,
                     self.mis_puntos3, self.mis_puntos4,
-                    self.triunfo, self.dic)
+                    self.triunfo, self.dic)'''
 
 
     def fordenar(self,mano_ori,ref_global,triunfo):
@@ -226,8 +226,8 @@ class Cmano(Cbaraja):
 
         return mano_salida, puntos
 
-    def frobar(self)
-        pass:
+    def frobar(self):
+        pass
 
 class Ctriunfo():
     def __init__(self):
