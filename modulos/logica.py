@@ -4,12 +4,13 @@ from PyQt5.QtWidgets import QMainWindow, QApplication
 from modulos import generico as play.Cmano
 
 class Clogica(Cmano):
+
     def __init__(self):
         super().__init__()
+        abajo = 0
+        arriba = 1
         self.baza = []
         if numj == 2:
-            abajo = 0
-            arriba = 1
             self.mi_baza, self.mis_puntos = self.fordenar(self.baza, self.dic, self.triunfo)
             for i in range(len(mi_baza)):
                 for j in range(len(dic[0])):
@@ -26,62 +27,45 @@ class Clogica(Cmano):
                 aux = baza_out[i]
                 baza_str.append(list(str(aux)))
 
+
             if baza_str[0][0] == baza_str[1][0]:
                 gana_puntos = mis_puntos[0] + mis_puntos[1]
 
-                if mi_baza[1] == baza[0]:
-                     puntos_0 = puntos_0 + gana_puntos
-
+                if mi_baza[1] == baza[abajo]:
+                     puntos_abajo = puntos_abajo + gana_puntos
+                     if abajo == 1:
+                         abajo = 0
+                         arriba = 1
                 else:
-                    puntos_1 = puntos_1 + gana_puntos
-                    if abajo == 0:
-                        abajo = 1
+                    puntos_arriba = puntos_arriba + gana_puntos
+                    if arriba == 1:
                         arriba = 0
-                        puntos_aux0 = puntos_0
-                        puntos_aux1 = puntos_1
-                        puntos_0 = puntos_aux1
-                        puntos_1 = puntos_aux0
-                    else:
-                        abajo = 0
-                        arriba = 1
-                        puntos_aux0 = puntos_0
-                        puntos_aux1 = puntos_1
-                        puntos_0 = puntos_aux1
-                        puntos_1 = puntos_aux0
+                        abajo = 1
             else:
                 if baza_str[0][0] == triunfo_str[0]:
                     gana_puntos = mis_puntos[0] + mis_puntos[1]
 
-                    if mi_baza[0] == baza[0]:
-                        puntos_0 = puntos_0 + gana_puntos
-
-                    else:
-                        puntos_1 = puntos_1 + gana_puntos
-                        if abajo == 0:
-                            abajo = 1
-                            arriba = 0
-                            puntos_aux0 = puntos_0
-                            puntos_aux1 = puntos_1
-                            puntos_0 = puntos_aux1
-                            puntos_1 = puntos_aux0
-                        else:
+                    if mi_baza[0] == baza[abajo]:
+                        puntos_abajo = puntos_abajo + gana_puntos
+                        if abajo == 1:
                             abajo = 0
                             arriba = 1
-                            puntos_aux0 = puntos_0
-                            puntos_aux1 = puntos_1
-                            puntos_0 = puntos_aux1
-                            puntos_1 = puntos_aux0
-
+                    else:
+                        puntos_arriba = puntos_arriba + gana_puntos
+                        if arriba == 1:
+                            arriba = 0
+                            abajo = 1
                 else:
                     gana_puntos = mis_puntos[0] + mis_puntos[1]
-                    puntos_0 = puntos_0 + gana_puntos
+                    if abajo == 0:
+                        puntos_abajo = puntos_abajo + gana_puntos
+                    else:
+                        puntos_arriba = puntos_arriba + gana_puntos
 
-
-
-
-
-
-
-
-    total_jugador1 =
-    total_jugador2 =
+            if puntos_arriba > 50:
+                partida_arriba = partida_arriba + 1
+            elif puntos_abajo > 50:
+                partida_abajo = partida_abajo + 1
+            else:
+                # PROPONGO QUE EN EL CASO DE NO LLEGAR A MÁS DE 50 SE EJECUTE LA MISMA FUNCIÓN, PERO CON UN WHILE
+                # EN EL CONDICIONAL PARA QUE PAR EN EL MOMENTO EN QUE SE LLEGUE A MÁS DE 50.
