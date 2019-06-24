@@ -17,8 +17,7 @@ class MainWindowClass(QMainWindow, main_class):
         #self.player_4 = wind.Window_player_4(None)
 
         self.jugar_2.clicked.connect(self.fopen_window_2)
-        #self.jugar_4.clicked.connect(self.fopen_window_4)
-
+        #self.jugar_4.clicked.connect(self.fopen_window_4
 
     def fopen_window_2(self):
         MainWindowClass.close(self)
