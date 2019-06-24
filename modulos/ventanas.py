@@ -147,15 +147,12 @@ class Window_player_2(QMainWindow, form_class_1):
         mano_nueva = play.Cmano()
 
 
-        puntos_arriba, puntos_abajo = self.una_baza.flogica(self.num_player, self.baza,self.dic)
+        puntos_arriba, puntos_abajo, ganador = self.una_baza.flogica(self.num_player, self.baza, self.dic)
 
-        if puntos_abajo > 0:
+        if ganador == 'j2':
             self.puntos_j2_num +=puntos_abajo
         else:
             self.puntos_j1_num += puntos_arriba
-
-        self.puntos_j1.setText('Puntos: {}'.format(self.puntos_j1_num))
-        self.puntos_j2.setText('Puntos: {}'.format(self.puntos_j2_num))
 
 
         self.num_bazas, self.mi_mano1,\
@@ -163,11 +160,6 @@ class Window_player_2(QMainWindow, form_class_1):
             = mano_nueva.frobar(self.num_bazas,self.mi_mano1,self.mi_mano1_num,
                                 self.carta_sel1_num, self.mi_mano2,self.mi_mano2_num,
                                 self.carta_sel2_num, self.baraja, puntos_abajo)
-
-        if puntos_abajo > 0:
-            ganador = 'j2'
-        else:
-            ganador = 'j1'
 
         self.fnuevoturno(self.mi_mano1,self.mi_mano2,ganador)
 
@@ -182,6 +174,7 @@ class Window_player_2(QMainWindow, form_class_1):
         self.carta_24.setPixmap(img_dorso)
         self.carta_25.setPixmap(img_dorso)
         self.carta_26.setPixmap(img_dorso)
+
         if ganador == 'j2':
             self.fcargarbotones(self.botones,mano2)
             cartas.fcambiocarta(self.i_carta_j1, self.icono)
@@ -191,6 +184,9 @@ class Window_player_2(QMainWindow, form_class_1):
             self.fcargarbotones(self.botones,mano1)
             cartas.fcambiocarta(self.i_carta_j1, self.icono)
             cartas.fcambiocarta(self.i_carta_j2, self.icono)
+
+        self.puntos_j1.setText('Puntos: {}'.format(self.puntos_j2_num))
+        self.puntos_j2.setText('Puntos: {}'.format(self.puntos_j1_num))
 
 
 

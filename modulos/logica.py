@@ -43,11 +43,15 @@ class Clogica(play.Cmano):
                      if self.abajo == 1:
                          self.abajo = 0
                          self.arriba = 1
+                         ganador = 'j2'
+                         return (puntos_arriba, puntos_abajo, ganador)
                 else:
                     puntos_arriba += gana_puntos
                     if self.arriba == 1:
                         self.arriba = 0
                         self.abajo = 1
+                        ganador = 'j1'
+                        return (puntos_arriba, puntos_abajo, ganador)
             else:
                 if self.baza_str[0][0] == triunfo_str[0]:
                     gana_puntos = sum(self.mis_puntos)
@@ -56,16 +60,23 @@ class Clogica(play.Cmano):
                         if self.abajo == 1:
                             self.abajo = 0
                             self.arriba = 1
+                            ganador = 'j2'
+                            return (puntos_arriba, puntos_abajo, ganador)
                     else:
                         puntos_arriba += gana_puntos
                         if self.arriba == 1:
                             self.arriba = 0
                             self.abajo = 1
+                            ganador = 'j1'
+                            return (puntos_arriba, puntos_abajo, ganador)
                 else:
                     gana_puntos = sum(self.mis_puntos)
                     if self.abajo == 0:
                         puntos_abajo += gana_puntos
+                        ganador = 'j2'
+                        return (puntos_arriba, puntos_abajo, ganador)
                     else:
                         puntos_arriba += gana_puntos
+                        ganador = 'j1'
+                        return (puntos_arriba, puntos_abajo, ganador)
 
-        return(puntos_arriba,puntos_abajo)
