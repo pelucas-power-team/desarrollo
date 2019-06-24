@@ -15,15 +15,17 @@ class Window_player_2(QMainWindow, form_class_1):
         QMainWindow.__init__(self, parent)
         self.setupUi(self)
         self.botones = [self.carta_1, self.carta_2, self.carta_3, self.carta_4, self.carta_5, self.carta_6]
-        #self.carta_jugada = [None, None]
         self.icono = './interfaces/icono.png'
         self.icono_transparente = './interfaces/iconot.png'
         self.carpeta = 'BarajaEsp/'
         self.formato = '.png'
+        self.baraja = []
         self.mi_mano1 = []
         self.mi_mano1_num = []
         self.mi_mano2 = []
         self.mi_mano2_num = []
+        self.puntos_j1_num = 0
+        self.puntos_j2_num = 0
         self.mis_puntos1 = []
         self.mis_puntos2 = []
         self.mano = None
@@ -35,6 +37,7 @@ class Window_player_2(QMainWindow, form_class_1):
         self.carta_j1 = None
         self.carta_j2 = None
         self.num_player = 2
+        self.num_bazas = 20
         self.carta_borrar = None
         self.fcargarbotones(self.botones,self.icono)
         self.mi_senal = QtCore.pyqtSignal(int)
@@ -43,7 +46,6 @@ class Window_player_2(QMainWindow, form_class_1):
         self.carta_sel2 = None
         self.carta_sel1_num = None
         self.carta_sel2_num = None
-        self.baza = [self.carta_sel1,self.carta_sel2]
         self.baza_num = [None, None]
         self.boton_repartir.clicked.connect(self.frepartir)
         self.botones[0].clicked.connect(self.ftirada)
@@ -80,8 +82,8 @@ class Window_player_2(QMainWindow, form_class_1):
 
         self.mi_mano1, self.mi_mano1_num,\
         self.mi_mano2, self.mi_mano2_num,\
-        self.mis_puntos1,self.mis_puntos2,\
-        self.mi_triunfo,self.dic = self.mano.frepartir(self.carpeta, self.formato,self.num_player)
+        self.mis_puntos1, self.mis_puntos2,\
+        self.mi_triunfo, self.dic, self.baraja = self.mano.frepartir(self.carpeta, self.formato,self.num_player)
 
         self.fmostar(self.mi_mano1,self.mi_triunfo,self.carpeta,self.formato)
 
@@ -142,10 +144,55 @@ class Window_player_2(QMainWindow, form_class_1):
 
     def fbaza(self):
         self.una_baza = log.Clogica()
+        mano_nueva = play.Cmano()
+
 
         puntos_arriba, puntos_abajo = self.una_baza.flogica(self.num_player, self.baza,self.dic)
-        self.puntos_j1.setText('Puntos: {}'.format(puntos_abajo))
-        self.puntos_j2.setText('Puntos: {}'.format(puntos_arriba))
+
+        if puntos_abajo > 0:
+            self.puntos_j2_num +=puntos_abajo
+        else:
+            self.puntos_j1_num += puntos_arriba
+
+        self.puntos_j1.setText('Puntos: {}'.format(self.puntos_j1_num))
+        self.puntos_j2.setText('Puntos: {}'.format(self.puntos_j2_num))
+
+
+        self.num_bazas, self.mi_mano1,\
+        self.mi_mano2, self.baraja\
+            = mano_nueva.frobar(self.num_bazas,self.mi_mano1,self.mi_mano1_num,
+                                self.carta_sel1_num, self.mi_mano2,self.mi_mano2_num,
+                                self.carta_sel2_num, self.baraja, puntos_abajo)
+
+        if puntos_abajo > 0:
+            ganador = 'j2'
+        else:
+            ganador = 'j1'
+
+        self.fnuevoturno(self.mi_mano1,self.mi_mano2,ganador)
+
+    def fnuevoturno(self, mano1, mano2, ganador):
+        self.freiniciarbotones()
+        cartas = play.Cbotones()
+        mazo = play.Cdorso()
+        img_dorso = mazo.fdorso(self.carpeta, self.formato)
+        self.carta_21.setPixmap(img_dorso)
+        self.carta_22.setPixmap(img_dorso)
+        self.carta_23.setPixmap(img_dorso)
+        self.carta_24.setPixmap(img_dorso)
+        self.carta_25.setPixmap(img_dorso)
+        self.carta_26.setPixmap(img_dorso)
+        if ganador == 'j2':
+            self.fcargarbotones(self.botones,mano2)
+            cartas.fcambiocarta(self.i_carta_j1, self.icono)
+            cartas.fcambiocarta(self.i_carta_j2, self.icono)
+
+        elif ganador == 'j1':
+            self.fcargarbotones(self.botones,mano1)
+            cartas.fcambiocarta(self.i_carta_j1, self.icono)
+            cartas.fcambiocarta(self.i_carta_j2, self.icono)
+
+
 
 
 '''class Window_player_4(QMainWindow, form_class_2):

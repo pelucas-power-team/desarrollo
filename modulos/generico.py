@@ -117,7 +117,7 @@ class Cmano(Cbaraja):
                     self.mi_mano_orden2.append(mi_carta)
                     self.carta.append(carp + str(mi_carta) + forma)
                     self.mi_mano2.append(QPixmap(self.carta[i]))
-            return (self.mi_mano1, self.mano_j1, self.mi_mano2, self.mano_j2, self.mis_puntos1, self.mis_puntos2, self.triunfo, self.dic)
+            return (self.mi_mano1, self.mano_j1, self.mi_mano2, self.mano_j2, self.mis_puntos1, self.mis_puntos2, self.triunfo, self.dic, self.baraja)
 
         '''elif numj == 4:
             #Esto todavia hay que adaptarlo para que ordene bien las cartas
@@ -226,8 +226,53 @@ class Cmano(Cbaraja):
 
         return mano_salida, puntos
 
-    def frobar(self):
-        pass
+    def frobar(self, numbazas, mano1, mano1_num,carta_1, mano2, mano2_num, carta_2, baraja, puntos):
+        if numbazas == 20:
+            triunfo = baraja[12]
+            del baraja[0:13]
+            baraja.append(triunfo)
+            if puntos>0:
+                for i in range(len(mano2_num)):
+                    if mano2_num[i] == carta_2:
+                        mano2_num[i] = baraja[0]
+                        mano2[i] = 'BarajaEsp' + str(carta_2) + '.png'
+                for i in range(len(mano1_num)):
+                    if mano1_num[i] == carta_1:
+                        mano1_num[i] = baraja[1]
+                        mano1[i] = 'BarajaEsp' + str(carta_1) + '.png'
+            else:
+                for i in range(len(mano2_num)):
+                    if mano2_num[i] == carta_2:
+                        mano2_num[i] = baraja[1]
+                        mano2[i] = 'BarajaEsp' + str(carta_2) + '.png'
+                for i in range(len(mano1_num)):
+                    if mano1_num[i] == carta_1:
+                        mano1_num[i] = baraja[0]
+                        mano1[i] = 'BarajaEsp' + str(carta_1) + '.png'
+        elif 20>numbazas>6:
+            del baraja[0:1]
+            if puntos > 0:
+                for i in range(len(mano2_num)):
+                    if mano2_num[i] == carta_2:
+                        mano2_num[i] = baraja[0]
+                        mano2[i] = 'BarajaEsp' + str(carta_2) + '.png'
+                for i in range(len(mano1_num)):
+                    if mano1_num[i] == carta_1:
+                        mano1_num[i] = baraja[1]
+                        mano1[i] = 'BarajaEsp' + str(carta_1) + '.png'
+            else:
+                for i in range(len(mano2_num)):
+                    if mano2_num[i] == carta_2:
+                        mano2_num[i] = baraja[1]
+                        mano2[i] = 'BarajaEsp' + str(carta_2) + '.png'
+                for i in range(len(mano1_num)):
+                    if mano1_num[i] == carta_1:
+                        mano1_num[i] = baraja[0]
+                        mano1[i] = 'BarajaEsp' + str(carta_1) + '.png'
+
+        numbazas-=1
+        return(numbazas, mano1, mano2,baraja)
+
 
 class Ctriunfo():
     def __init__(self):
