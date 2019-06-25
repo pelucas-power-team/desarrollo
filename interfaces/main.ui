@@ -11,24 +11,8 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>EL Guiñote</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>40</y>
-     <width>201</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Elija el número de Jugadores</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QPushButton" name="jugar_2">
    <property name="geometry">
     <rect>
@@ -39,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>2 Jugadores</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="jugar_4">
@@ -52,9 +36,28 @@
     </rect>
    </property>
    <property name="text">
-    <string>4 Jugadores</string>
+    <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="fondo">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>fondo</zorder>
+  <zorder>jugar_2</zorder>
+  <zorder>jugar_4</zorder>
  </widget>
  <resources/>
  <connections/>
