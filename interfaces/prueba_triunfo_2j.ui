@@ -501,9 +501,9 @@
   <widget class="QLabel" name="puntos_j1">
    <property name="geometry">
     <rect>
-     <x>15</x>
+     <x>10</x>
      <y>430</y>
-     <width>55</width>
+     <width>60</width>
      <height>13</height>
     </rect>
    </property>
@@ -514,9 +514,9 @@
   <widget class="QLabel" name="puntos_j2">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>65</x>
      <y>20</y>
-     <width>55</width>
+     <width>60</width>
      <height>13</height>
     </rect>
    </property>
